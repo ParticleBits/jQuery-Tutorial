@@ -1,8 +1,8 @@
 /*!
  * jQuery Tutorial Plugin
- * version: 0.1 (2001-Jun-25)
+ * version: 0.2 (2001-Jun-26)
  * author: Mike Gioia (mike [at] particlebits [dot] com)
- * url: http://particlebits.com
+ * url: http://particlebits.com/code/jquery-tutorial
  * @requires jQuery v1.4 or later
  *
  * Dual licensed under the MIT and GPL licenses:
@@ -15,14 +15,10 @@
  * Initialize the tutorial and start it up
  * 
  * Location options can take any of the following:
- *   tl: top left
  *   tc: top center
- *   tr: top right
  *   ml: middle left
  *   mr: middle right
- *   bl: bottom left
  *   bc: bottom center
- *   br: bottom right
  */
 $.fn.tutorial = function( options ) 
 {
@@ -32,7 +28,9 @@ $.fn.tutorial = function( options )
         return this;
     }
     
-    // default options
+    // default options. as of v0.2 bounce is not supported. it seems to take
+    // up too much browser memory so i'll be looking for a new implementation
+    // method.
     //
     options = $.extend( true, {
         location:           'tl',
@@ -41,7 +39,8 @@ $.fn.tutorial = function( options )
         bounce:             false
     }, options );
     
-                
+    options.bounce = false;
+    
     // if the guide isn't hidden, hide it now. enable the options.
     //
     var id = this.attr( 'id' );
@@ -205,19 +204,31 @@ $.tutorialShowStep = function( el, index )
         var arrowImg = $( "<div><div/>").attr( 'id', 'tutorial-arrow-' + index ).addClass( 'tutorial-arrow ' + arrow );
 
         switch ( arrow ) {
-            case 'tl':
             case 'tc':
-            case 'tr':
                 var offsetTop = 48;
                 var offsetLeft = ( $(target).outerWidth() / 2 ) - 24;
                 var bounceTop = targetTop - offsetTop - $(target).outerHeight();
                 var bounceDistance = 20;
                 break;
             case 'ml':
+                if ( $(target).outerHeight() < 48 ) {
+                    var offsetTop = ( 48 - $(target).outerHeight() ) / 2;
+                }
+                else {
+                    var offsetTop = ( $(target).outerHeight() / 2 ) - 24;
+                }
+                var offsetLeft = -48;
+                break;
             case 'mr':
-            case 'bl':
+                if ( $(target).outerHeight() < 48 ) {
+                    var offsetTop = ( 48 - $(target).outerHeight() ) / 2;
+                }
+                else {
+                    var offsetTop = ( $(target).outerHeight() / 2 ) - 24;
+                }
+                var offsetLeft = $(target).outerWidth();
+                break;
             case 'bc':
-            case 'br':
                 var offsetTop = $(target).outerHeight() * -1;
                 var offsetLeft = ( $(target).outerWidth() / 2 ) - 24;
                 var bounceTop = targetTop - offsetTop;

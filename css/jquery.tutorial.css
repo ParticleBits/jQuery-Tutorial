@@ -84,3 +84,9 @@
 .tutorial-arrow.bc {
     background:url('tutorial/arrow-bc.png') no-repeat;
 }
+.tutorial-arrow.ml {
+    background:url('tutorial/arrow-ml.png') no-repeat;
+}
+.tutorial-arrow.mr {
+    background:url('tutorial/arrow-mr.png') no-repeat;
+}
