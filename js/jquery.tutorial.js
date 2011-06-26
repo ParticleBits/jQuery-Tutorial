@@ -14,7 +14,13 @@
 /**
  * Initialize the tutorial and start it up
  * 
- * Location options can take any of the following:
+ * Guide location options can take any of the following:
+ *   tl: top left
+ *   tr: top right
+ *   bl: bottom left
+ *   br: bottom right
+ * 
+ * Arrow location options can take any of the following:
  *   tc: top center
  *   ml: middle left
  *   mr: middle right
@@ -46,6 +52,24 @@ $.fn.tutorial = function( options )
     var id = this.attr( 'id' );
     this.hide();
     this.css( 'width', options.width );
+    
+    switch ( options.location ) {
+        case 'tl':
+            this.addClass( 'tl' );
+            break;
+        case 'tr':
+            this.addClass( 'tr' );
+            break;
+        case 'bl':
+            this.addClass( 'bl' );
+            break;
+        case 'br':
+            this.addClass( 'br' );
+            break;
+        default: 
+            el.addClass( 'tl' );
+            break;
+    }
                 
     // loop through the guide wrapper and set up each content div.
     // their data-target attribute should point to the element on the page
@@ -61,7 +85,8 @@ $.fn.tutorial = function( options )
         $this.hide();
         $this.data( 'properties', {
             target: ( $this.attr( 'data-target' ) ) ? $this.attr( 'data-target' ) : null,
-            arrow: ( $this.attr( 'data-arrow' ) ) ? $this.attr( 'data-arrow' ) : settings.arrow
+            arrow: ( $this.attr( 'data-arrow' ) ) ? $this.attr( 'data-arrow' ) : options.arrow,
+            location: ( $this.attr( 'data-location' ) ) ? $this.attr( 'data-location' ) : options.location
         });
     });
             
@@ -179,11 +204,36 @@ $.tutorialShowStep = function( el, index )
     
     
     var step = el.find( 'div:nth-child(' + index + ')' );
-    var target = step.attr( 'data-target' );
-    var arrow = step.attr( 'data-arrow' );
-    
+    var properties = step.data( 'properties' );
+    var target = properties.target;
+    var arrow = properties.arrow;
+    var location = properties.location;
+
     if ( ! target ) {
         return this;
+    }
+    
+    // move the guide if we have it set
+    //
+    if ( location ) {
+        el.removeClass( "tl tr bl br" );
+        switch ( location ) {
+            case 'tl':
+                el.addClass( 'tl' );
+                break;
+            case 'tr':
+                el.addClass( 'tr' );
+                break;
+            case 'bl':
+                el.addClass( 'bl' );
+                break;
+            case 'br':
+                el.addClass( 'br' );
+                break;
+            default: 
+                el.addClass( 'tl' );
+                break;
+        }
     }
     
     step.show();

@@ -6,13 +6,27 @@
     color: #FFFFFF;
     display: none;
     font-size: 14px;
-    left: 15px;
     line-height: 150%;
     padding: 15px;
     position: fixed;
-    top: 15px;
     width: 320px;
     z-index: 10000;
+}
+.tutorial.tl {
+    top: 15px;
+    left: 15px;
+}
+.tutorial.tr {
+    top: 15px;
+    right: 15px;
+}
+.tutorial.bl {
+    bottom: 15px;
+    left: 15px;
+}
+.tutorial.br {
+    bottom: 15px;
+    right: 15px;
 }
 
 .tutorial h1 { 
