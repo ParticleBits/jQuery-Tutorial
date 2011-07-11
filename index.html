@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>jQuery Tutorial Plugin | Particle Bits</title>
+    
+    <style type="text/css" media="all">
+        * { padding: 0; margin: 0; }
+        html { height: 100%; }
+        body { font-family:"Trebuchet MS",Helvetica,Jamrul,sans-serif; font-size:16px; background-color:#eee; }
+        
+        a { color:#6695E2; text-decoration:none; border-bottom:1px solid #ddd; }
+        a:hover { border-bottom:1px solid #ccc; background-color:#D0E2FF; color:#2C5FB2; }
+        code { background-color: #000000; color: #FFFFFF; padding:2px 3px 1px; font-size:14px; }
+        h1 { font-weight:normal; font-size:28px; padding:6px 12px; margin-bottom:15px; background-color: #D0E2FF; }
+        p { line-height:150%; color:#333; }
+        xmp { background-color: #000000; color: #FFFFFF; font-size: 14px; margin: 15px 20px; padding:18px; }
+        
+        #stage { width:960px; border:1px solid #ddd; padding:15px; margin:40px auto 20px; background-color: #FFFFFF; }
+        #header { padding-bottom:15px; border-bottom:1px solid #ddd; margin-bottom:15px; }
+        #header p { margin-bottom:10px; }
+        #start { margin:15px 30px; padding:6px 12px; font-size:22px; color:#fff; background-color:#000; border:none;
+                 cursor:pointer; }
+        #content .section { margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:20px; }
+        #content h2 { font-weight:normal; font-size:22px; margin-bottom:10px; padding:5px 10px; background-color:#EAF2FF; }
+        #content h3 { font-size:16px; margin-bottom:5px; }
+        #content .return { margin-top:40px; }
+        #content p.padded { margin-bottom:15px; }
+        #content ul { margin:10px 40px 25px; }
+        #content ul strong.label { float:left; display:block; width:40px; }
+        #content ul li { margin-bottom:5px; }
+        #footer { color: #999999; font-size: 13px; margin: 0 auto; padding: 10px 0 30px; text-shadow: 0 1px 0 #FFFFFF; 
+                  width: 960px; }
+        
+        .centered { text-align:center; }
+        .round { -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; }
+    </style>
+    
+    <link href="css/jquery.tutorial.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="js/lib/jquery.1.6.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery.tutorial.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        // load the tutorial when the document is ready
+        //
+        $(document).ready( function() {
+            // calling this will start and display the tutorial.
+            //
+            // possible options include:
+            //   location:  tl, tr, bl, br for top left, top right, bottom left, and bottom right.
+            //                defaults to 'tl'.
+            //   width:     integer in pixels, defaults to 320px.
+            //   opactiy:   decimal from 0 to 1 with 1 being opaque. defaults to 0.4.
+            //   returnTop: boolean for returning to top of page when the tutorial is over.
+            //
+            $('#start').click( function() {
+                options = {
+                    location:  'tl',
+                    width:     320,
+                    opacity:   0.4,
+                    returnTop: true
+                };
+                $('#tutorial').tutorial( options );
+            });
+        });
+    </script>
+    
+    <meta name="author" content="Mike Gioia" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="jQuery Site Toturial Plugin" />
+    <meta name="keywords" content="jQuery Tutorial, jQuery Site Tutorial, Tutorial Plugin, Tutorial jQuery, Site Tutorial" />
+</head>
+<body>
+    <div id="stage" class="round">
+        <a name="top"></a>
+        <div id="header">
+            <h1 class="round">jQuery Tutorial Plugin Demo</h1>
+            <p>
+                This plugin displays a very clean and simple tutorial flow for any web page. All you need to do is set up your
+                markup correctly and you're good to go. To initialize it, just call the following on your tutorial element in your 
+                HTML: <code>$('#tutorial').tutorial();</code>
+            </p>
+            <div class="centered">
+                <input type="button" id="start" class="round" value="Start Demo" />
+            </div>        
+<!--            
+            <p>Structure your tutorial page with div items in the following format:</p>
+            <pre>
+                <div data-target="#properly .formatted:selector" data-arrow="tc" data-tutorial="tl">
+                    <h1>This is the step header</h1>
+                    <p>
+                        This is the step description.
+                    </p>
+                </div>
+            </pre>
+-->
+        </div><!-- /header -->
+        
+        <div id="content">
+            <div class="section">
+                <h2 class="round">Include the Script and Stylesheet</h2>
+                <p>
+                    There's 1 stylesheet and 1 javascript file that you need to include on any page displaying the tutorial. Also,
+                    please copy the images folder 'tutorial' to the same directory that your jquery.tutorial.css file is in. If you
+                    would like to move the location of these images, then please update the jquery.tutorial.css image paths
+                    appropriately.
+                </p>
+                
+<xmp class="round" id="xmp-includes"><link href="css/jquery.tutorial.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="js/lib/jquery.1.6.2.min.js" type="text/javascript"></script>
+<script src="js/jquery.tutorial.js" type="text/javascript"></script>
+</xmp>
+            </div>
+            
+            <div class="section">
+                <h2 class="round">Configuring the Tutorial</h2>
+                <p>
+                    You have a few options when configuring the tutorial. To start the tutorial, you need to call <code>$('#tutorial').tutorial();</code>
+                    anywhere in your application. You can optionally pass in an options object to this function by calling:
+                </p>                    
+<xmp class="round">$('#tutorial').tutorial( options );</xmp>
+
+                <p>
+                    These are the following options you can set:
+                </p>
+                <ul>
+                    <li>
+                        <h3>location</h3>
+                        <p>Default: 'tl'
+                        <p>Any one of the valid window location values mentioned below.</p>
+                    </li>
+                    <li>
+                        <h3>width</h3>
+                        <p>Default: 320</p>
+                        <p>Integer, in pixels, for the width of the tutorial window.</p>
+                    </li>
+                    <li>
+                        <h3>opacity</h3>
+                        <p>Default: 0.4</p>
+                        <p>Decimal between 0 and 1.0 for the overlay opacity. 1.0 is opaque.</p>
+                    </li>
+                    <li>
+                        <h3>returnTop</h3>
+                        <p>Default: true</p>
+                        <p>Boolean signaling whether or not the tutorial should return the user back to the top of the page when complete.</p>
+                    </li>
+                </ul>
+            </div>    
+               
+            <div class="section">
+                <h2 class="round">Structure of the Tutorial Element</h2>
+                <p>
+                    The tutorial elementis simply a div with class <code>tutorial</code> containing a set of slide elements. To start,
+                    add this code to your page:
+                </p>
+                
+<xmp class="round"><div id="tutorial" class="tutorial">    
+    <!-- slides will go here -->
+</div>
+</xmp>
+                
+                <p>
+                    The tutorial element contains a collection of slide <code>div</code>s with the following elements and HTML5 data properties:
+                </p>
+
+<xmp class="round" id="xmp-structure"><div data-target="#selector .for:target" data-arrow="tc" data-location="tl">
+    <h1>Headline for Step 1</h1>
+    <p>
+        This is the message for Step 1. 
+    </p>
+</div>
+</xmp>
+                
+                <p>
+                    Each step <code>div</code> requires both the <code>data-target</code> and <code>data-arrow</code> properties to be set.
+                    The <code>data-location</code> defaults to the options you specify when creating the tutorial. However, if you'd like
+                    to move the location of the tutorial window for a certain step, set the <code>data-location</code> to one of 'tl', 'tr',
+                    'bl', or 'br' for top left, tor right, bottom left, and bottom right respectively. You need to set it back in the next
+                    step if you change the window location mid-tutorial.
+                </p>
+                <p>
+                    Data arrow takes one of 'tc', 'ml', 'mr', or 'bc' for top center, middle left, middle right, or bottom center respectively.
+                    You can mess around with these to see how they interact or take a look at the tutorial on this page by clicking "Start Demo"
+                    at the top of the page.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="round">Setting the Target, Arrow, and Window Location</h2>
+                <h3>Target</h3>
+                <p class="padded">
+                    The <code>data-target</code> property needs to be any valid, jQuery selector that targets <strong>one element</strong> on
+                    the page. It could be an ID (preferred) or a selector choosing the first child, nth element, or anything at all selecting
+                    one element. If you choose a selector with more than one it will default to the first element of that collection.   
+                </p>
+                
+                <h3>Arrow Location</h3>
+                <p>
+                    Arrow locations can be any of the following options:
+                </p>
+                <ul>
+                    <li>
+                        <strong class="label">tc</strong>
+                        <span>Top center</span>
+                    </li>
+                    <li>
+                        <strong class="label">ml</strong>
+                        <span>Middle left</span>
+                    </li>
+                    <li>
+                        <strong class="label">mr</strong>
+                        <span>Middle right</span>
+                    </li>
+                    <li>
+                        <strong class="label">bc</strong>
+                        <span>Bottom center</span>
+                    </li>
+                </ul>
+                
+                <h3>Window Location</h3>
+                <p>
+                    Window location can be any of the following options:
+                </p>
+                <ul id="window-location">
+                    <li>
+                        <strong class="label">tl</strong>
+                        <span>Top left</span>
+                    </li>
+                    <li>
+                        <strong class="label">tr</strong>
+                        <span>Top right</span>
+                    </li>
+                    <li>
+                        <strong class="label">bl</strong>
+                        <span>Bottom left</span>
+                    </li>
+                    <li>
+                        <strong class="label">br</strong>
+                        <span>Bottom right</span>
+                    </li>
+                </ul>
+                
+                <p class="padded">
+                    It is important to note that if you change the window location mid-way through the tutorial, the window location will
+                    remain at the new location until you change it back.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="round">Showing the Tutorial and Calling the Controls Programmatically</h2>
+                <p class="padded">
+                    You have the ability to start the tutorial, move next or previous in the slides, or cancel the tutorial in your application.
+                    To start the tutorial simply call <code>$('#tutorial').tutorial();</code>. <code>#tutorial</code> is the ID of the element
+                    containing all of your slides. It needs to have class <code>tutorial</code> to work properly.
+                </p>
+                
+                <h3>Next Slide</h3>
+                <p>
+                    To move to the next slide, call the following on the same element you initialized the tutorial with:
+                </p>
+<xmp>$('#tutorial').tutorialNext();</xmp>
+                
+                <h3>Previous Slide</h3>
+                <p>
+                    To move to the previous slide, call the following on the same element you initialized the tutorial with:
+                </p>
+<xmp>$('#tutorial').tutorialPrev();</xmp>
+                
+                <h3>Cancel Tutorial</h3>
+                <p>
+                    To cancel the slideshow, call the following on the same element you initialized the tutorial with:
+                </p>
+<xmp>$('#tutorial').tutorialCancel();</xmp>
+
+            </div>
+            
+            <div class="section">
+                <h2 class="round">Credits and More Info</h2>
+                <p class="padded">
+                    jQuery Tutorial was written and coded by <a href="http://twitter.com/mikegioia">Mike Gioia</a> over at <a href="http://particlebits.com">ParticleBits</a>.
+                    It was developed for <a href="http://playlistlove.com">PlaylistLove</a>, an awesome music discovery and song recommendation service.
+                </p>
+                <p>
+                    For more information on this tutorial, please visit:
+                </p>
+                <ul>
+                    <li>
+                        Github: <a href="https://github.com/ParticleBits/jQuery-Tutorial" id="github-link">https://github.com/ParticleBits/jQuery-Tutorial</a>
+                    </li>
+                    <li>
+                        Project Page: <a href="http://particlebits.com/code/jquery-tutorial" id="github-link">http://particlebits.com/code/jquery-tutorial</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="centered return">
+                <a href="#top">Return to Top of Page</a>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /stage -->
+    
+    <div id="footer">
+        Written and developed by ParticleBits. ParticleBits is a development journal started by the Gioia brothers.
+    </div><!-- /footer -->
+    
+    <div id="tutorial" class="tutorial">
+        <div data-target="#start" data-arrow="tc" data-location="tl">
+            <h1>Starting the Tutorial</h1>
+            <p>
+                Simply call $('#tutorial').tutorial() on the element you've set up and voila! 
+            </p>
+        </div>
+        <div data-target="#xmp-includes" data-arrow="ml" data-location="tr">
+            <h1>Set the Arrow Positions</h1>
+            <p>
+                You can set the arrow position to top center (tc), middle left (ml), middle right (mr), or bottom center (bc).
+            </p>
+        </div>
+        <div data-target="#xmp-structure" data-arrow="ml" data-location="br">
+            <h1>Set the Window Positions</h1>
+            <p>
+                You can set the window position to top left (tl), top right (tr), bottom left (bl), or bottom right (br).
+            </p>
+        </div>
+        <div data-target="ul#window-location li:last span" data-arrow="bc" data-location="tl">
+            <h1>Target Any Page Element</h1>
+            <p>
+                This slide targets "ul#window-location li:last span". Any valid jQuery selector will work.
+            </p>
+        </div>
+        <div data-target="#github-link" data-arrow="tc" data-location="tl">
+            <h1>Fork the Code & Contribute!</h1>
+            <p>
+                Check out the Github page and if you're feeling generous, fork the code and contribute updates!
+            </p>
+        </div>
+    </div><!-- /tutorial -->
+    
+</body>
+</html>
