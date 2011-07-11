@@ -42,6 +42,8 @@
 .tutorial p {
     padding-top:8px;
     margin-bottom:15px;
+    color: #FFFFFF;
+    line-height: 150%;
 }
 
 .tutorial-overlay {
@@ -67,9 +69,12 @@
     font-weight:bold;
     text-decoration:none;
     margin-right:5px;
+    border:none;
 }
 .tutorial-button:hover {
     background-color:#EFC313;
+    color:#000000;
+    border:none;
 }
 
 .tutorial-cancel {
@@ -83,6 +88,12 @@
     -webkit-border-radius:5px;
     -moz-border-radius:5px; 
     border-radius:5px;
+    border:none;
+}
+.tutorial-cancel:hover {
+    border:none;
+    background-color:#333333;
+    color:#999999;
 }
 
 .tutorial-arrow {

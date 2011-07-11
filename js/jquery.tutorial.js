@@ -34,6 +34,13 @@ $.fn.tutorial = function( options )
         return this;
     }
     
+    // clear the current tutorial if one is up there
+    //
+    var id = this.attr( 'id' );
+    if ( this.data( 'options' ) ) {
+        $('#' + id).tutorialCancel();
+    }
+    
     // default options. as of v0.2 bounce is not supported. it seems to take
     // up too much browser memory so i'll be looking for a new implementation
     // method.
@@ -42,16 +49,17 @@ $.fn.tutorial = function( options )
         location:           'tl',
         width:              320,
         opacity:            0.4,
-        bounce:             false
+        bounce:             false,
+        returnTop:          true
     }, options );
     
     options.bounce = false;
     
     // if the guide isn't hidden, hide it now. enable the options.
     //
-    var id = this.attr( 'id' );
     this.hide();
     this.css( 'width', options.width );
+    this.removeClass( 'tl tr bl br' );
     
     switch ( options.location ) {
         case 'tl':
@@ -191,6 +199,10 @@ $.fn.tutorialCancel = function()
     $( '.tutorial-button' ).remove();
     $( '#' + this.attr( 'id' ) + '-cancel' ).remove();
     
+    if ( this.data( 'options' ).returnTop ) {
+        $("html, body").animate({ scrollTop: 0 }, 500);
+    }
+    
 }; // end $.fn.tutorialCancel
 
 /**
@@ -240,12 +252,13 @@ $.tutorialShowStep = function( el, index )
     
     var targetTop = $(target).offset().top;
     var targetLeft = $(target).offset().left;
+    var targetHeight = $(target).outerHeight();
     var windowHeight = $(window).height();
     
     // compute the scroll to value, we want a little padding at the bottom
-    // of the page (about 100px)
+    // of the page (about 60px)
     //
-    $("html, body").animate({ scrollTop: targetTop + 100 - windowHeight }, 500);
+    $("html, body").animate({ scrollTop: targetTop + targetHeight + 60 - windowHeight }, 500);
 
     // if we have an arrow add that to the DOM wherever they specified. we
     // need to compute the offset of based on their location preference.
@@ -265,7 +278,7 @@ $.tutorialShowStep = function( el, index )
                     var offsetTop = ( 48 - $(target).outerHeight() ) / 2;
                 }
                 else {
-                    var offsetTop = ( $(target).outerHeight() / 2 ) - 24;
+                    var offsetTop = ( ( $(target).outerHeight() / 2 ) - 24 ) * -1;
                 }
                 var offsetLeft = -48;
                 break;
