@@ -200,7 +200,7 @@ $.fn.tutorialCancel = function()
     $( '#' + this.attr( 'id' ) + '-cancel' ).remove();
     
     if ( this.data( 'options' ).returnTop ) {
-        $("html, body").animate({ scrollTop: 0 }, 500);
+        $("html, body").animate({ scrollTop: 0 }, 1000);
     }
     
 }; // end $.fn.tutorialCancel

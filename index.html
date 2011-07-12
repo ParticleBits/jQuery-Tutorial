@@ -12,7 +12,7 @@
         
         a { color:#6695E2; text-decoration:none; border-bottom:1px solid #ddd; }
         a:hover { border-bottom:1px solid #ccc; background-color:#D0E2FF; color:#2C5FB2; }
-        code { background-color: #000000; color: #FFFFFF; padding:2px 3px 1px; font-size:14px; }
+        code { background-color: #000000; color: #FFFFFF; padding:2px 3px; font-size:14px; position:relative; top:-1px; }
         h1 { font-weight:normal; font-size:28px; padding:6px 12px; margin-bottom:15px; background-color: #D0E2FF; }
         p { line-height:150%; color:#333; }
         xmp { background-color: #000000; color: #FFFFFF; font-size: 14px; margin: 15px 20px; padding:18px; }
@@ -35,10 +35,13 @@
         
         .centered { text-align:center; }
         .round { -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; }
+        .rounder { -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; }
     </style>
     
     <link href="css/jquery.tutorial.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/prettify.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="js/lib/jquery.1.6.2.min.js" type="text/javascript"></script>
+    <script src="js/prettify.js" type="text/javascript"></script>
     <script src="js/jquery.tutorial.js" type="text/javascript"></script>
     
     <script type="text/javascript">
@@ -63,6 +66,10 @@
                 };
                 $('#tutorial').tutorial( options );
             });
+            
+            // call the pretty print script
+            //
+            prettyPrint();
         });
     </script>
     
@@ -72,10 +79,10 @@
     <meta name="keywords" content="jQuery Tutorial, jQuery Site Tutorial, Tutorial Plugin, Tutorial jQuery, Site Tutorial" />
 </head>
 <body>
-    <div id="stage" class="round">
+    <div id="stage" class="rounder">
         <a name="top"></a>
         <div id="header">
-            <h1 class="round">jQuery Tutorial Plugin Demo</h1>
+            <h1 class="round">jQuery Tutorial Plugin</h1>
             <p>
                 This plugin displays a very clean and simple tutorial flow for any web page. All you need to do is set up your
                 markup correctly and you're good to go. To initialize it, just call the following on your tutorial element in your 
@@ -95,11 +102,13 @@
                     would like to move the location of these images, then please update the jquery.tutorial.css image paths
                     appropriately.
                 </p>
-                
-<xmp class="round" id="xmp-includes"><link href="css/jquery.tutorial.css" rel="stylesheet" type="text/css" media="screen" />
-<script src="js/lib/jquery.1.6.2.min.js" type="text/javascript"></script>
-<script src="js/jquery.tutorial.js" type="text/javascript"></script>
-</xmp>
+
+<pre class="prettyprint" id="includes">
+&lt;link href="css/jquery.tutorial.css" rel="stylesheet" type="text/css" media="screen" /&gt;
+&lt;script src="js/lib/jquery.1.6.2.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.tutorial.js" type="text/javascript"&gt;&lt;/script&gt;
+</pre>
+
             </div>
             
             <div class="section">
@@ -108,7 +117,9 @@
                     You have a few options when configuring the tutorial. To start the tutorial, you need to call <code>$('#tutorial').tutorial();</code>
                     anywhere in your application. You can optionally pass in an options object to this function by calling:
                 </p>                    
-<xmp class="round">$('#tutorial').tutorial( options );</xmp>
+<pre class="prettyprint">
+$('#tutorial').tutorial( options );
+</pre>
 
                 <p>
                     These are the following options you can set:
@@ -144,22 +155,24 @@
                     add this code to your page:
                 </p>
                 
-<xmp class="round"><div id="tutorial" class="tutorial">    
-    <!-- slides will go here -->
-</div>
-</xmp>
-                
+<pre class="prettyprint">
+&lt;div id=&quot;tutorial&quot; class=&quot;tutorial&quot;&gt;
+    &lt;!-- slides will go here --&gt;
+&lt;/div&gt;
+</pre>
+              
                 <p>
                     The tutorial element contains a collection of slide <code>div</code>s with the following elements and HTML5 data properties:
                 </p>
 
-<xmp class="round" id="xmp-structure"><div data-target="#selector .for:target" data-arrow="tc" data-location="tl">
-    <h1>Headline for Step 1</h1>
-    <p>
-        This is the message for Step 1. 
-    </p>
-</div>
-</xmp>
+<pre class="prettyprint" id="structure">
+&ltdiv data-target=&quot;#selector .for:target&quot; data-arrow=&quot;tc&quot; data-location=&quot;tl&quot;&gt
+    &lt;h1&gt;Headline for Step 1&lt;/h1&gt;
+    &ltp&gt
+        This is the message for Step 1.
+    &lt/p&gt
+&lt/div&gt
+</pre>
                 
                 <p>
                     Each step <code>div</code> requires both the <code>data-target</code> and <code>data-arrow</code> properties to be set.
@@ -248,19 +261,28 @@
                 <p>
                     To move to the next slide, call the following on the same element you initialized the tutorial with:
                 </p>
-<xmp>$('#tutorial').tutorialNext();</xmp>
                 
+<pre class="prettyprint">
+$('#tutorial').tutorialNext();
+</pre>
+
                 <h3>Previous Slide</h3>
                 <p>
                     To move to the previous slide, call the following on the same element you initialized the tutorial with:
                 </p>
-<xmp>$('#tutorial').tutorialPrev();</xmp>
                 
+<pre class="prettyprint">
+$('#tutorial').tutorialPrev();
+</pre>
+
                 <h3>Cancel Tutorial</h3>
                 <p>
                     To cancel the slideshow, call the following on the same element you initialized the tutorial with:
                 </p>
-<xmp>$('#tutorial').tutorialCancel();</xmp>
+
+<pre class="prettyprint">
+$('#tutorial').tutorialCancel();
+</pre>
 
             </div>
             
@@ -300,13 +322,13 @@
                 Simply call $('#tutorial').tutorial() on the element you've set up and voila! 
             </p>
         </div>
-        <div data-target="#xmp-includes" data-arrow="ml" data-location="tr">
+        <div data-target="#includes" data-arrow="ml" data-location="tr">
             <h1>Set the Arrow Positions</h1>
             <p>
                 You can set the arrow position to top center (tc), middle left (ml), middle right (mr), or bottom center (bc).
             </p>
         </div>
-        <div data-target="#xmp-structure" data-arrow="ml" data-location="br">
+        <div data-target="#structure" data-arrow="ml" data-location="br">
             <h1>Set the Window Positions</h1>
             <p>
                 You can set the window position to top left (tl), top right (tr), bottom left (bl), or bottom right (br).
